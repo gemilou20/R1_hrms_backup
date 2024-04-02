@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('assets/images/ANAA LOGO.png')}}" type="image/png">
+    <link rel="icon" href="{{ asset('assets/images/LOGO2.png')}}" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +20,7 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body x-data="main" class="antialiased relative font-nunito text-sm font-normal overflow-x-hidden"
+<body x-data="main" class="antialiased relative font-nunito text-md font-normal overflow-x-hidden"
     :class="[$store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme, $store.app.menu, $store.app.layout, $store.app
         .rtlClass
     ]">
@@ -90,11 +90,13 @@
         });
     </script>
 
+    @include('sweetalert::alert')
 
 
     <div class="main-container text-black dark:text-white-dark min-h-screen" :class="[$store.app.navbar]">
 
         @include('layouts.componentLayouts.sidebar')
+        
 
         <div class="main-content">
             @include('layouts.componentLayouts.header')

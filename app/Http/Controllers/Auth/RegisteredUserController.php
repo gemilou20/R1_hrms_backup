@@ -36,10 +36,17 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $user_code = mt_rand(10000, 99999);
+        if($this->userCode($user_code)){
+            $user_code = mt_rand(10000, 99999);
+        }
+        $role = 'User';
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $role,
+            'user_code' => $user_code
         ]);
 
         event(new Registered($user));
@@ -47,5 +54,9 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function userCode($user_code){
+        return User::whereUserCode($user_code);
     }
 }
